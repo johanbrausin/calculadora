@@ -9,6 +9,7 @@ import os
 #import pywebview
 # Inicializar la aplicación Dash
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.FLATLY])
+server = app.server
 
 
 
