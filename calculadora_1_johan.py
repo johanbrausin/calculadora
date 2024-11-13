@@ -6,6 +6,7 @@ import webbrowser
 import threading
 import math
 import os
+from decimal import Decimal, getcontext
 #import pywebview
 # Inicializar la aplicación Dash
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.FLATLY])
