@@ -4,12 +4,11 @@ from dash import dcc, html, Input, Output
 import dash_bootstrap_components as dbc
 import webbrowser
 import threading
-import os
 #import pywebview
 # Inicializar la aplicación Dash
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.FLATLY])
 
-server = app.server  # Asegúrate de tener esto si necesitas exponer el servidor Flask
+
 
 
 
@@ -67,13 +66,13 @@ app.layout = dbc.Container([
             id='raiz_cuad',
             options=[{'label': dl.DashLatex(r""" $$ \sqrt{Numero 1}$$ """), 'value': 'num1'},
                      {'label': dl.DashLatex(r""" $$ \sqrt{Numero 2}$$ """), 'value': 'num2'}],
-            value = 'num1/num2 '
+            value = 'num1 '
         ), width=3),
         dbc.Col(dcc.Dropdown(
             id='raiz_cub',
             options=[{'label': dl.DashLatex(r""" $${Número1}^{1 \over 3}$$ """), 'value': 'num1'},
                      {'label': dl.DashLatex(r""" $${Número2}^{1 \over 3}$$ """), 'value': 'num2'}],
-            value = 'num1^num2 '
+            value = 'num1'
         ), width=3)
     ]),
     
