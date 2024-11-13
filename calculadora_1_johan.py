@@ -400,5 +400,9 @@ def actualizar_resultado(formato_entrada1, formato_entrada2, formato_salida, num
 #     app.run_server(debug=True, host='127.0.0.1', port=8050)
 
 
+# Obtener el puerto de la variable de entorno PORT
+port = os.environ.get("PORT", 8050)
+
+# Ejecutar la aplicación en el puerto adecuado
 if __name__ == "__main__":
-    app.run_server(debug=False, host="0.0.0.0", port=8000)
+    app.run_server(debug=False, host="0.0.0.0", port=int(port))
