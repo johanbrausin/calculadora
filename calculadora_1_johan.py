@@ -16,6 +16,11 @@ server = app.server
 
 
 # Definición del diseño de la aplicación
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.FLATLY])
+
+
+
+# Definición del diseño de la aplicación
 app.layout = dbc.Container([
     html.H1("Calculadora en Varios Sistemas Numéricos (Flotantes)", style={'text-align': 'center', 'fontsize': '24x'}),
     html.Br(),
@@ -148,19 +153,19 @@ app.layout = dbc.Container([
 
 # Función para convertir un número de cualquier base a decimal usando álgebra modular.
 
-def potencia_rapida(base, exponente):
-    resultado = 1
-    while exponente > 0:
-        # Si el exponente es impar, multiplica el resultado por la base
-        if exponente % 2 == 1:
-            resultado *= base
-        # Cuadrar la base y dividir el exponente por 2
-        base *= base
-        exponente //= 2
-    return int(math.floor(math.log10(resultado)))
+getcontext().prec = 10000  # Ajusta el nivel de precisión según sea necesario
 
+def potencia_exponencial(a, b):
+    resultado = Decimal(a) ** Decimal(b)
+    # Representar el resultado en notación científica
+    # Verifica si el valor es infinito y lo reemplaza por un número grande.
+    if math.isinf(float(resultado)):
+        valor = 1e308  # Un valor finito grande, cerca del límite de representación de un float en Python.
 
-
+    # Redondea el valor a un número de decimales deseado.
+        return round(valor, 2)
+    else:
+        return float(f"{resultado:.3e}")
 
 
 def a_decimal(numero_str, base):
@@ -362,12 +367,12 @@ def actualizar_resultado(formato_entrada1, formato_entrada2, formato_salida, num
         if orden_pot == 'num1^num2':
             if numero2_decimal is None:
                 return "Ingrese el segundo número para la potencia."
-            resultado = potencia_rapida(numero1_decimal,numero2_decimal)
+            resultado = potencia_exponencial(numero1_decimal,numero2_decimal)
             
         else:
             if numero2_decimal is None:
                 return "Ingrese el segundo número para la potencia."
-            resultado = potencia_rapida(numero2_decimal,numero1_decimal)
+            resultado = potencia_exponencial(numero2_decimal,numero1_decimal)
         
     elif boton_presionado == 'raiz-cuadrada':
         
@@ -395,9 +400,7 @@ def actualizar_resultado(formato_entrada1, formato_entrada2, formato_salida, num
         return de_decimal(resultado, {'bin': 2, 'oct': 8, 'hex': 16, 'dec': 10}[formato_salida])
     # else:
     #     return 'Defina la operación'
-    return "Defina la operación"
-
-# Ejecutar el servidor en localhost sin necesidad de internet
+    return "Defina la operación"# Ejecutar el servidor en localhost sin necesidad de internet
 # if __name__ == '__main__':
 #     app.run_server(debug=True, host='127.0.0.1', port=8050)
 
