@@ -4,19 +4,11 @@ from dash import dcc, html, Input, Output
 import dash_bootstrap_components as dbc
 import webbrowser
 import threading
-import math
-import os
 from decimal import Decimal, getcontext
+import math
+
 #import pywebview
 # Inicializar la aplicación Dash
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.FLATLY])
-server = app.server
-
-
-
-
-
-# Definición del diseño de la aplicación
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.FLATLY])
 
 
@@ -401,7 +393,25 @@ def actualizar_resultado(formato_entrada1, formato_entrada2, formato_salida, num
         return de_decimal(resultado, {'bin': 2, 'oct': 8, 'hex': 16, 'dec': 10}[formato_salida])
     # else:
     #     return 'Defina la operación'
-    return "Defina la operación"# Ejecutar el servidor en localhost sin necesidad de internet
+    return "Defina la operación"
+
+# Ejecutar el servidor en localhost sin necesidad de internet
+# if __name__ == '__main__':
+#     app.run_server(debug=True, host='127.0.0.1', port=8050)
+
+
+
+
+def open_browser():
+    webbrowser.open('http://127.0.0.1:8050')
+
+# Ejecutar el servidor y abrir el navegador en un hilo separado
+if __name__ == '__main__':
+    # Abrir la página web automáticamente
+    threading.Timer(1, open_browser).start()
+    
+    # Ejecutar la aplicación web
+    app.run_server(debug=True, host='127.0.0.1', port=8050)
 # if __name__ == '__main__':
 #     app.run_server(debug=True, host='127.0.0.1', port=8050)
 
