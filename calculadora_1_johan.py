@@ -384,14 +384,7 @@ def actualizar_resultado(formato_entrada1, formato_entrada2, formato_salida, num
 
 
 
-
-def open_browser():
-    webbrowser.open('http://127.0.0.1:8050')
-
-# Ejecutar el servidor y abrir el navegador en un hilo separado
 if __name__ == '__main__':
-    # Abrir la página web automáticamente
-    threading.Timer(1, open_browser).start()
-    
-    # Ejecutar la aplicación web
-    app.run_server(debug=True, host='127.0.0.1', port=8050)
+    # Cambia el host a '0.0.0.0' y usa el puerto de la variable de entorno
+    port = int(os.environ.get('PORT', 8050))  # Render define la variable PORT automáticamente
+    app.run_server(debug=True, host='0.0.0.0', port=port)
