@@ -4,6 +4,7 @@ from dash import dcc, html, Input, Output
 import dash_bootstrap_components as dbc
 import webbrowser
 import threading
+import math
 #import pywebview
 # Inicializar la aplicación Dash
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.FLATLY])
@@ -144,6 +145,22 @@ app.layout = dbc.Container([
 ])
 
 # Función para convertir un número de cualquier base a decimal usando álgebra modular.
+
+def potencia_rapida(base, exponente):
+    resultado = 1
+    while exponente > 0:
+        # Si el exponente es impar, multiplica el resultado por la base
+        if exponente % 2 == 1:
+            resultado *= base
+        # Cuadrar la base y dividir el exponente por 2
+        base *= base
+        exponente //= 2
+    return int(math.floor(math.log10(resultado)))
+
+
+
+
+
 def a_decimal(numero_str, base):
     """
     Convierte un número en una base arbitraria a su valor en base decimal.
@@ -343,12 +360,12 @@ def actualizar_resultado(formato_entrada1, formato_entrada2, formato_salida, num
         if orden_pot == 'num1^num2':
             if numero2_decimal is None:
                 return "Ingrese el segundo número para la potencia."
-            resultado = numero1_decimal ** numero2_decimal
+            resultado = potencia_rapida(numero1_decimal,numero2_decimal)
             
         else:
             if numero2_decimal is None:
                 return "Ingrese el segundo número para la potencia."
-            resultado = numero2_decimal ** numero1_decimal
+            resultado = potencia_rapida(numero2_decimal,numero1_decimal)
         
     elif boton_presionado == 'raiz-cuadrada':
         
