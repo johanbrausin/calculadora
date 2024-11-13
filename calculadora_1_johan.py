@@ -9,7 +9,7 @@ import os
 # Inicializar la aplicación Dash
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.FLATLY])
 
-
+server = app.server  # Asegúrate de tener esto si necesitas exponer el servidor Flask
 
 
 
@@ -382,7 +382,6 @@ def actualizar_resultado(formato_entrada1, formato_entrada2, formato_salida, num
 # Ejecutar el servidor en localhost sin necesidad de internet
 # if __name__ == '__main__':
 #     app.run_server(debug=True, host='127.0.0.1', port=8050)
-
 
 
 if __name__ == '__main__':
