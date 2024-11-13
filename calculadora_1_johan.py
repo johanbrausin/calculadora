@@ -387,4 +387,6 @@ def actualizar_resultado(formato_entrada1, formato_entrada2, formato_salida, num
 if __name__ == '__main__':
     # Cambia el host a '0.0.0.0' y usa el puerto de la variable de entorno
     port = int(os.environ.get('PORT', 8050))  # Render define la variable PORT automáticamente
-    app.run_server(debug=True, host='0.0.0.0', port=port)
+    #app.run_server(debug=True, host='0.0.0.0', port=port)
+    app.run_server(debug=True, host='35.160.120.126', port=port)
+    
